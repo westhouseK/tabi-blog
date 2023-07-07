@@ -1,3 +1,8 @@
+export const metadata = {
+  title: 'Tabi blog',
+  description: 'We are going to introduce my travel',
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +10,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      {children}
+      <head />
+      <body>{children}</body>
     </html>
   )
 }
