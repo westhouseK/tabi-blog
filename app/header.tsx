@@ -1,9 +1,9 @@
 import Link from "next/link"
-import style from "./header.module.css"
+import style from "./header.module.scss"
 
 const Header = () => {
   return (
-    <header>
+    <header className={style.header}>
       <div>
         <Link className={style.logo} href="/">
           Tabi blog

@@ -5,6 +5,7 @@ import matter from "gray-matter"
 import Link from "next/link"
 import Footer from "./footer"
 import Header from "./header"
+import style from "./top.module.scss"
 
 async function getPosts() {
   const currentPostsDir = path.join(process.cwd(), "posts")
@@ -25,8 +26,8 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <main>
-        <div>KV</div>
+      <main className={style.container}>
+        <div className={style.kv}>KV</div>
         <div>カテゴリ別記事</div>
         <div>人気記事</div>
         {posts.map((post) => (
