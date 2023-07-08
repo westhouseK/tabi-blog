@@ -35,7 +35,7 @@ export default async function Home() {
               <Link href={`articles/${post.slug}`}>{post.data.title}</Link>
             </div>
             <div>タグ：{post.data.tag}</div>
-            <div>投稿日：{post.data.create_date}</div>
+            <div>投稿日：{post.data.created_date}</div>
             <div>詳細：{post.data.description}</div>
             <div>
               -------------------------------------------------------------------------------------------------
