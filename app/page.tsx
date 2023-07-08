@@ -26,6 +26,9 @@ export default async function Home() {
     <>
       <Header />
       <main>
+        <div>KV</div>
+        <div>カテゴリ別記事</div>
+        <div>人気記事</div>
         {posts.map((post) => (
           <>
             <div key={post.slug}>
