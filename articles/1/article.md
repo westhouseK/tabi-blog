@@ -3,6 +3,7 @@ title: "世界一周でマイルが貯めるクレジットカード"
 created_date: "2022-07-08"
 updated_date: "2022-07-08"
 description: "世界一周すると、もう一回世界一周できちゃうくらいマイルがたまるらしい...！"
+image: "kv.jpg"
 tag: "準備"
 ---
 
