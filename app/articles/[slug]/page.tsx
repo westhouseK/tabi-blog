@@ -3,6 +3,11 @@ import { readFileSync, readdirSync } from "fs"
 import path from "path"
 import matter from "gray-matter"
 import Image from "next/image"
+import rehypeStringify from "rehype-stringify"
+import remarkParse from "remark-parse"
+import remarkRehype from "remark-rehype"
+import remarkToc from "remark-toc"
+import { unified } from "unified"
 
 export async function generateStaticParams() {
   const currentPostDir = path.join(process.cwd(), "articles")
@@ -14,8 +19,24 @@ export async function generateStaticParams() {
 }
 
 async function getPost(slug: string) {
-  const currentPostsDir = path.join(process.cwd(), "articles")
-  return matter(readFileSync(path.join(currentPostsDir, slug, "article.md"), "utf-8"))
+  const { data, content } = matter(
+    readFileSync(path.join(process.cwd(), "articles", slug, "article.md"), "utf-8"),
+  )
+  const result = (
+    await unified()
+      .use(remarkParse)
+      .use(remarkToc, {
+        heading: "目次",
+      })
+      .use(remarkRehype)
+      .use(rehypeStringify)
+      .process(content)
+  ).toString()
+
+  return {
+    data,
+    content: result,
+  }
 }
 
 export default async function Article({ params }: { params: { slug: string } }) {
@@ -30,8 +51,7 @@ export default async function Article({ params }: { params: { slug: string } }) 
         alt={data.title}
       />
       <h1>記事の詳細</h1>
-      <p>記事の本文</p>
-      <div>{content}</div>
+      <div dangerouslySetInnerHTML={{ __html: content }}></div>
     </div>
   )
 }
