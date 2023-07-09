@@ -32,16 +32,14 @@ export default async function Home() {
           <h2 className={style.top_section_ttl}>人気記事</h2>
           <div className={style.top_section_inner}>
             {posts.map((post) => (
-              <>
+              <Link href={`articles/${post.slug}`} key={post.slug}>
                 <div className={style.top_section_article}>
-                  <h3 className={style.top_article_ttl} key={post.slug}>
-                    <Link href={`articles/${post.slug}`}>{post.data.title}</Link>
-                  </h3>
+                  <h3 className={style.top_article_ttl}>{post.data.title}</h3>
                   <p className={style.top_article_tag}>{post.data.tag}</p>
-                  <p className={style.top_article_date}>{post.data.created_date}</p>
+                  <p className={`${style.top_article_date} ${style.txt_en}`}>{post.data.created_date}</p>
                   <p className={style.top_article_txt}>{post.data.description}</p>
                 </div>
-              </>
+              </Link>
             ))}
           </div>
         </section>
