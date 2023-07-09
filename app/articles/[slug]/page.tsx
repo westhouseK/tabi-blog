@@ -23,7 +23,12 @@ export default async function Article({ params }: { params: { slug: string } }) 
 
   return (
     <div>
-      <Image src={`/${params.slug}/kv.jpg`} width={600} height={350} alt={data.title} />
+      <Image
+        src={`/${params.slug}/article-main-visual.jpg`}
+        width={600}
+        height={350}
+        alt={data.title}
+      />
       <h1>記事の詳細</h1>
       <p>記事の本文</p>
       <div>{content}</div>
