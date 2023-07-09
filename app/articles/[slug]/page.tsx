@@ -2,17 +2,16 @@ import { readFileSync, readdirSync } from "fs"
 import path from "path"
 
 export async function generateStaticParams() {
-  const currentPostDir = path.join(process.cwd(), "posts")
-  const postFiles = readdirSync(currentPostDir)
-  return postFiles.map((postFile) => {
+  const currentPostDir = path.join(process.cwd(), "articles")
+  return readdirSync(currentPostDir).map((slug) => {
     return {
-      slug: postFile.replace(/\.md$/, ""),
+      slug,
     }
   })
 }
 
 async function getPost(slug: string) {
-  return readFileSync(path.join(process.cwd(), "posts", `${slug}.md`), "utf-8")
+  return readFileSync(path.join(process.cwd(), "articles", slug, "article.md"), "utf-8")
 }
 
 export default function Article({ params }: { params: { slug: string } }) {
