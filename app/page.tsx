@@ -2,6 +2,7 @@ import { readFileSync, readdirSync } from "fs"
 
 import path from "path"
 import matter from "gray-matter"
+import Image from "next/image"
 import Link from "next/link"
 import Footer from "./footer"
 import Header from "./header"
@@ -11,10 +12,10 @@ async function getPosts() {
   const currentPostsDir = path.join(process.cwd(), "articles")
   const postDirs = readdirSync(currentPostsDir)
   return postDirs.map((slug) => {
-    const post = matter(readFileSync(path.join(currentPostsDir, slug, "article.md"), "utf-8"))
+    const { data } = matter(readFileSync(path.join(currentPostsDir, slug, "article.md"), "utf-8"))
     return {
       slug,
-      data: post.data,
+      data,
     }
   })
 }
@@ -30,18 +31,27 @@ export default async function Home() {
         <div>カテゴリ別記事</div>
         <section>
           <h2 className={style.top_section_ttl}>人気記事</h2>
-              <div className={style.top_section_inner}>
-                {posts.map((post) => (
-                  <div className={style.top_section_article}  key={post.slug}>
-                      <Link className={style.top_link} href={`articles/${post.slug}`}>
-                          <h3 className={style.top_article_ttl}>{post.data.title}</h3>
-                          <p className={style.top_article_tag}>{post.data.tag}</p>
-                          <p className={`${style.top_article_date} ${style.txt_en}`}>{post.data.created_date}</p>
-                          <p className={style.top_article_txt}>{post.data.description}</p>
-                      </Link>
-                  </div>
-                ))}
-            </div>
+          <div className={style.top_section_inner}>
+            {posts.map((post) => (
+              <div className={style.top_section_article} key={post.slug}>
+                <Link className={style.top_link} href={`articles/${post.slug}`}>
+                  <Image
+                    src={`/${post.slug}/${post.data.main_image}`}
+                    width={300}
+                    height={200}
+                    alt={post.data.title}
+                  />
+                  <h3 className={style.top_article_ttl}>{post.data.title}</h3>
+                  <p className={style.top_article_tag}>{post.data.tag}</p>
+                  <p className={`${style.top_article_date} ${style.txt_en}`}>
+                    {post.data.created_date}
+                  </p>
+                  <p className={style.top_article_txt}>{post.data.description}</p>
+                </Link>
+              </div>
+            ))}
+          </div>
+          =nges
         </section>
       </main>
       <Footer />
