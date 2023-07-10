@@ -42,7 +42,7 @@ export default async function Home() {
                     alt={post.data.title}
                   />
                   <h3 className={style.top_article_ttl}>{post.data.title}</h3>
-                  <p className={style.top_article_tag}>{post.data.tag}</p>
+                  <p className={style.top_article_tag}>{post.data.tags}</p>
                   <p className={`${style.top_article_date} ${style.txt_en}`}>
                     {post.data.created_date}
                   </p>
@@ -51,7 +51,6 @@ export default async function Home() {
               </div>
             ))}
           </div>
-          =nges
         </section>
       </main>
       <Footer />
