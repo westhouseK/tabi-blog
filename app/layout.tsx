@@ -1,5 +1,5 @@
-import style from "./layout.module.scss"
 import "ress"
+import style from "./layout.module.scss"
 
 export const metadata = {
   title: "Tabi blog",

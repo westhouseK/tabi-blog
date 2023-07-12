@@ -1,19 +1,19 @@
 .logo {
-    color: darkblue;
-    text-decoration: none;
-    font-size: x-large;
-    font-weight: bold;
+  color: darkblue;
+  text-decoration: none;
+  font-size: x-large;
+  font-weight: bold;
 }
-.header{
-    position: fixed;
-    background-color: pink;
-    margin-bottom: 2vw;
+.header {
+  position: fixed;
+  background-color: pink;
+  margin-bottom: 2vw;
 
-    &:hover{
-        opacity: 0.6;
-    }
+  &:hover {
+    opacity: 0.6;
+  }
 }
 
-.kv{
-    height: 20vw;
+.kv {
+  height: 20vw;
 }
