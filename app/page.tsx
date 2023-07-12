@@ -4,9 +4,9 @@ import path from "path"
 import matter from "gray-matter"
 import Image from "next/image"
 import Link from "next/link"
-import Footer from "./footer"
-import Header from "./header"
 import style from "./top.module.scss"
+import Footer from "@/components/Footer/Footer"
+import Header from "@/components/Header/Header"
 
 async function getPosts() {
   const currentPostsDir = path.join(process.cwd(), "articles")
