@@ -3,11 +3,15 @@ import { readFileSync, readdirSync } from "fs"
 import path from "path"
 import matter from "gray-matter"
 import Image from "next/image"
+import { Fragment, ReactNode, createElement } from "react"
+import rehypeParse from "rehype-parse"
+import rehypeReact from "rehype-react"
 import rehypeStringify from "rehype-stringify"
 import remarkParse from "remark-parse"
 import remarkRehype from "remark-rehype"
 import remarkToc from "remark-toc"
 import { unified } from "unified"
+import ArticleContentImage from "@/components/ArticleContentImage/ArticleContentImage"
 
 export async function generateStaticParams() {
   const currentPostDir = path.join(process.cwd(), "articles")
@@ -39,6 +43,19 @@ async function getPost(slug: string) {
   }
 }
 
+const toReactNode = (content: string) => {
+  return unified()
+    .use(rehypeParse, { fragment: true })
+    .use(rehypeReact, {
+      createElement,
+      Fragment,
+      components: {
+        img: ArticleContentImage,
+      },
+    })
+    .processSync(content).result as ReactNode // TODO: 型キャストしない方法を考える
+}
+
 export default async function Article({ params }: { params: { slug: string } }) {
   const { data, content } = await getPost(params.slug)
 
@@ -46,7 +63,7 @@ export default async function Article({ params }: { params: { slug: string } }) 
     <div>
       <Image src={`/${params.slug}/${data.main_image}`} width={600} height={350} alt={data.title} />
       <h1>記事の詳細</h1>
-      <div dangerouslySetInnerHTML={{ __html: content }}></div>
+      <div>{toReactNode(content)}</div>
     </div>
   )
 }
