@@ -35,12 +35,14 @@ export default async function Home() {
             {posts.map((post) => (
               <div className={style.top_section_article} key={post.slug}>
                 <Link className={style.top_link} href={`articles/${post.slug}`}>
-                  <Image
-                    src={`/${post.slug}/${post.data.main_image}`}
-                    width={300}
-                    height={200}
-                    alt={post.data.title}
-                  />
+                  <div className={style.top_article_img}>
+                    <Image
+                      src={`/${post.slug}/${post.data.main_image}`}
+                      width={300}
+                      height={200}
+                      alt={post.data.title}
+                    />
+                  </div>
                   <h3 className={style.top_article_ttl}>{post.data.title}</h3>
                   <p className={style.top_article_tag}>{post.data.tags}</p>
                   <p className={`${style.top_article_date} ${style.txt_en}`}>
