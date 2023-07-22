@@ -1,9 +1,11 @@
 import { readFileSync, readdirSync } from "fs"
-
 import path from "path"
-import matter from "gray-matter"
+
+import { Fragment, HtmlHTMLAttributes, ReactNode, createElement } from "react"
+
 import Image from "next/image"
-import { Fragment, ReactNode, createElement } from "react"
+
+import matter from "gray-matter"
 import rehypeParse from "rehype-parse"
 import rehypeReact from "rehype-react"
 import rehypeStringify from "rehype-stringify"
@@ -11,6 +13,7 @@ import remarkParse from "remark-parse"
 import remarkRehype from "remark-rehype"
 import remarkToc from "remark-toc"
 import { unified } from "unified"
+
 import ArticleContentImage from "@/components/ArticleContentImage/ArticleContentImage"
 
 export async function generateStaticParams() {
@@ -43,6 +46,11 @@ async function getPost(slug: string) {
   }
 }
 
+// マークダウンにコンポーネントを配置するサンプル
+const Myh3 = ({ children }: HtmlHTMLAttributes<HTMLElement>): JSX.Element => {
+  return <h3 style={{ color: "red" }}>{children}</h3>
+}
+
 const toReactNode = (content: string) => {
   return unified()
     .use(rehypeParse, { fragment: true })
@@ -51,6 +59,7 @@ const toReactNode = (content: string) => {
       Fragment,
       components: {
         img: ArticleContentImage,
+        h3: Myh3,
       },
     })
     .processSync(content).result as ReactNode // TODO: 型キャストしない方法を考える
