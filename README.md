@@ -15,5 +15,4 @@
   - [個人ブログをNext.js v13に移行](https://zenn.dev/panda_program/scraps/6c66f160636969)
   - [generateStaticParamsについて](https://www.commte.co.jp/learn-nextjs/generateStaticParams)
 - Format
-  - [ESlint, Pretterの設定](https://zenn.dev/hungry_goat/articles/b7ea123eeaaa44)
-  - [Pretterの自動保存について](https://qiita.com/KKKKK/items/3b9dba55653cb7993bf5)
+  - [ESlint, Pretterの設定](https://hepokon365.hatenablog.com/entry/2022/05/22/234043)
